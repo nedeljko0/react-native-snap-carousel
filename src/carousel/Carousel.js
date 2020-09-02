@@ -64,7 +64,7 @@ export default class Carousel extends Component {
         slideStyle: ViewPropTypes ? ViewPropTypes.style : View.propTypes.style,
         shouldOptimizeUpdates: PropTypes.bool,
         swipeThreshold: PropTypes.number,
-        useScrollView: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+        useScrollView: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
         vertical: PropTypes.bool,
         onBeforeSnapToItem: PropTypes.func,
         onSnapToItem: PropTypes.func
