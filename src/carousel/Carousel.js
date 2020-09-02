@@ -1354,7 +1354,7 @@ export default class Carousel extends Component {
             ...this._getComponentStaticProps()
         };
 
-        const ScrollViewComponent = typeof useScrollView === 'function' ? useScrollView : AnimatedScrollView
+        const ScrollViewComponent = typeof useScrollView === 'function' || typeof useScrollView === 'object' ? useScrollView : AnimatedScrollView;
 
         return this._needsScrollView() ? (
             <ScrollViewComponent {...props}>
