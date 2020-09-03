@@ -67,7 +67,8 @@ export default class Carousel extends Component {
         useScrollView: PropTypes.oneOfType([PropTypes.bool, PropTypes.func, PropTypes.object]),
         vertical: PropTypes.bool,
         onBeforeSnapToItem: PropTypes.func,
-        onSnapToItem: PropTypes.func
+        onSnapToItem: PropTypes.func,
+        CustomFlatlistItem: PropTypes.element
     };
 
     static defaultProps = {
@@ -99,7 +100,8 @@ export default class Carousel extends Component {
         shouldOptimizeUpdates: true,
         swipeThreshold: 20,
         useScrollView: !AnimatedFlatList,
-        vertical: false
+        vertical: false,
+        CustomFlatlistItem: null
     }
 
     constructor (props) {
@@ -1342,7 +1344,7 @@ export default class Carousel extends Component {
     }
 
     render () {
-        const { data, renderItem, useScrollView } = this.props;
+        const { data, renderItem, useScrollView, CustomFlatlistItem } = this.props;
 
         if (!data || !renderItem) {
             return null;
@@ -1354,7 +1356,7 @@ export default class Carousel extends Component {
             ...this._getComponentStaticProps()
         };
 
-        const ScrollViewComponent = typeof useScrollView === 'function' || typeof useScrollView === 'object' ? useScrollView : AnimatedScrollView;
+        const ScrollViewComponent = typeof useScrollView === 'function' ? useScrollView : AnimatedScrollView;
 
         return this._needsScrollView() ? (
             <ScrollViewComponent {...props}>
@@ -1365,7 +1367,7 @@ export default class Carousel extends Component {
                 }
             </ScrollViewComponent>
         ) : (
-            <AnimatedFlatList {...props} />
+            CustomFlatlistItem ? <CustomFlatlistItem {...props}/>: <AnimatedFlatList {...props} />
         );
     }
 }
